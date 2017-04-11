@@ -1,0 +1,22 @@
+<template name="info">
+  <h2>Learn Meteor!</h2>
+  {{#if currentUser}}
+  <ul>
+    <li>
+      <form class="info-link-add">
+        <input type="text" name="lat" placeholder="Lat" required>
+        <input type="text" name="lng" placeholder="Lng" required>
+        <input type="text" name="radius" placeholder="Radius" required>
+        <input type="text" name="advertisement_title" placeholder="Advertisement[title]" required>
+        <input type="text" name="advertisement_description" placeholder="Advertisement[description]" required>
+        <input type="submit" name="submit" value="Add new fence">
+      </form>
+    </li>
+    {{#each links}}
+      <li><a href="{{url}}" target="_blank">{{title}}</a></li>
+    {{/each}}
+  </ul>
+  {{else}}
+  <p>Please login to add content</p>
+  {{/if}}
+</template>
