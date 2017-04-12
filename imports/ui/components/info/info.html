@@ -13,7 +13,8 @@
       </form>
     </li>
     {{#each fences}}
-      <li><a href="#">{{lat}}</a></li>
+      <li>Lat : {{lat}} Lng : {{lng}}</li>
+      <li>{{#each this.advertisements}}{{title}} {{description}}{{/each}}</li>
     {{/each}}
   </ul>
   {{else}}
