@@ -26,3 +26,4 @@ johanbrook:publication-collector  # Test a Meteor publication by collecting its 
 accounts-ui
 accounts-password
 dburles:google-maps
+force-ssl

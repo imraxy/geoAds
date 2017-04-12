@@ -2,7 +2,7 @@ import { Fences } from '/imports/api/fences/fences.js';
 import './map.html';
 
 Meteor.startup(function() {  
-GoogleMaps.load({ v: '3', key: 'AIzaSyA38OB3QrAv4fC2d4B5w98VxsgfqiC4yY4', libraries: 'geometry,places,drawing' });
+	GoogleMaps.load({ v: '3', key: 'AIzaSyA38OB3QrAv4fC2d4B5w98VxsgfqiC4yY4', libraries: 'geometry,places,drawing' });
 });
 
 Template.map.onCreated(function() {
