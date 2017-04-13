@@ -9,8 +9,6 @@ Meteor.methods({
     //check(url, String);
     //check(title, String);
 
-    console.log(advertisements);
-    
     return Fences.insert({
       userId: Meteor.userId(),
       lat,
@@ -19,5 +17,19 @@ Meteor.methods({
       advertisements: advertisements,
       createdAt: new Date(),
     });
+  },
+
+  'fences.update'(lat, lng, radius, advertisements) {
+    //check(url, String);
+    //check(title, String);
+    
+    return Fences.update({lat: lat, lng: lng}, {
+      userId: Meteor.userId(),
+      lat,
+      lng,
+      radius,
+      advertisements: advertisements,
+      createdAt: new Date(),
+    }, { upsert : true });
   },
 });

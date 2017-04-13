@@ -22,7 +22,7 @@ GoogleMaps.ready('map', function(map) {
 	Fences.find().observe({
 		added: function (document) {
 			var marker = new google.maps.Marker({
-				draggable: false,
+				draggable: true,
 				animation: google.maps.Animation.DROP,
 				position: new google.maps.LatLng(document.lat, document.lng),
 				title: document.advertisements[0]['title'],
@@ -32,6 +32,7 @@ GoogleMaps.ready('map', function(map) {
 
 			google.maps.event.addListener(marker, 'dragend', function(event) {
 				Fences.update(marker.id, { $set: { lat: event.latLng.lat(), lng: event.latLng.lng() }});
+				alert('moved');
 			});
 
 			markers[document._id] = marker;
