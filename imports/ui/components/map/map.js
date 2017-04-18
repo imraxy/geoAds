@@ -7,16 +7,26 @@ Meteor.startup(function() {
 
 Template.map.onCreated(function() {
 
+Meteor.subscribe('fences.all');
+Meteor.subscribe('fences.nearest', [ 26.88755022616618, 75.83488941192627 ]);
+
 var circle;
 
 GoogleMaps.ready('map', function(map) {
   
+	var map = GoogleMaps.maps.map.instance;
+  
+	var infoWindow = new google.maps.InfoWindow({
+		map: map
+	});
+
 	/** /
-	google.maps.event.addListener(map.instance, 'click', function(event) {
-	Fences.insert({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+	google.maps.event.addListener(map, 'click', function(event) {
+		Fences.insert({ lat: event.latLng.lat(), lng: event.latLng.lng() });
 	});
 	/**/
 
+	
 	var markers = {};
 
 	Fences.find().observe({
@@ -26,13 +36,19 @@ GoogleMaps.ready('map', function(map) {
 				animation: google.maps.Animation.DROP,
 				position: new google.maps.LatLng(document.lat, document.lng),
 				title: document.advertisements[0]['title'],
-				map: map.instance,
+				map: map,
 				id: document._id
 			});
 
 			google.maps.event.addListener(marker, 'dragend', function(event) {
-				Fences.update(marker.id, { $set: { lat: event.latLng.lat(), lng: event.latLng.lng() }});
-				alert('moved');
+
+				Meteor.call('fences.update', marker.id, event.latLng.lat(), event.latLng.lng(), (error) => {
+					if (error) {
+						alert(error.error);
+					} else {
+						alert(marker.title + " Updated location");
+					}
+		  		});
 			});
 
 			markers[document._id] = marker;
@@ -49,12 +65,7 @@ GoogleMaps.ready('map', function(map) {
 		}	
 	});
 
-	/**/
-  var map = GoogleMaps.maps.map.instance;
-  
-  var infoWindow = new google.maps.InfoWindow({
-  	map: map
-  });
+	/**/  
   
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
@@ -134,8 +145,8 @@ Template.map.helpers({
 mapOptions: function() {
 	if (GoogleMaps.loaded()) {
 		return {
-			center: new google.maps.LatLng(-37.8136, 144.9631),
-			zoom: 18
+			center: new google.maps.LatLng(26.886248834126576, 75.83332300186157),
+			zoom: 16
 		};
 	}
 }

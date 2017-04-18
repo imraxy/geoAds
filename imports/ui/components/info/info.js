@@ -26,7 +26,7 @@ Template.info.events({
     const radius = target.radius;
     const advertisements = [{title: target.advertisement_title.value, description: target.advertisement_description.value}];
 
-    Meteor.call('fences.update', lat.value, lng.value, radius.value, advertisements, (error) => {
+    Meteor.call('fences.replace', lat.value, lng.value, radius.value, advertisements, (error) => {
       if (error) {
         alert(error.error);
       } else {
