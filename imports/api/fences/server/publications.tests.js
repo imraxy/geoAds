@@ -25,4 +25,14 @@ describe('fences publications', function () {
       });
     });
   });
+
+  describe('fences.nearest', function () {
+    it('sends neatest fences', function (done) {
+      const collector = new PublicationCollector();
+      collector.collect('fences.nearest', (collections) => {
+        assert.equal(collections.fences.length, 1);
+        done();
+      });
+    });
+  });
 });

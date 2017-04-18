@@ -15,6 +15,7 @@ Meteor.methods({
       lng,
       radius,
       advertisements: advertisements,
+      loc: [lat, lng],
       createdAt: new Date(),
     });
   },
@@ -29,6 +30,7 @@ Meteor.methods({
       lng,
       radius,
       advertisements: advertisements,
+      loc: [Number(lat), Number(lng)],
       createdAt: new Date(),
     }, { upsert : true });
   },
