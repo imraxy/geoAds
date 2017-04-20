@@ -4,7 +4,7 @@ import './info.html';
 
 Template.info.onCreated(function () {
   Meteor.subscribe('fences.all');
-  Meteor.subscribe('fences.nearest', [ 26.88755022616618, 75.83488941192627 ]);
+  Meteor.subscribe('fences.nearest', 26.88755022616618, 75.83488941192627 );
 });
 
 Template.info.helpers({

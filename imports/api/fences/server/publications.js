@@ -7,13 +7,14 @@ Meteor.publish('fences.all', function () {
 	return Fences.find();
 });
 
-Meteor.publish("fences.nearest", function (latlng) {
+Meteor.publish("fences.nearest", function (lat, lng) {
+
    return Fences.find({
       loc: {
         $near: {
           $geometry: {
             type: "Point",
-            coordinates: latlng
+            coordinates: [lat, lng]
           },
           $maxDistance: 1000   //meters
         }
