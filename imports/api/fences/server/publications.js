@@ -3,6 +3,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Fences } from '../fences.js';
 
+Meteor.startup(function () {  
+	Fences._ensureIndex({ "loc": "2dsphere" }, { "unique": true });
+});
+
 Meteor.publish('fences.all', function () {
 	return Fences.find();
 });
